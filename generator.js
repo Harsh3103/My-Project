@@ -23,11 +23,12 @@ const generatePDF = async (name, selectedCourse, selectedDate) => {
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
   
     //get custom font
-    const fontBytes = await fs.readFile('./Sanchez-Regular.ttf');
+    const fontBytes = await fs.readFile('./GoodVibrations Script.ttf');
+    const dateBytes = await fs.readFile('./Sanchez-Regular.ttf');
   
     // Embed our custom font in the document
     const customFont = await pdfDoc.embedFont(fontBytes);
-  
+    const dateFont = await pdfDoc.embedFont(dateBytes);
     // Get the first page of the document
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
@@ -51,26 +52,26 @@ const generatePDF = async (name, selectedCourse, selectedDate) => {
     });
   
     // Manually position the course and date below the name
-    const courseFontSize = 24;
-    const dateFontSize = 18;
-    const courseXPosition = 360; // Adjust the x position as needed
-    const courseYPosition = 218;
-    const dateXPosition = 155; // Adjust the x position as needed
-    const dateYPosition = 150;
+    // const courseFontSize = 24;
+    const dateFontSize = 16;
+    // const courseXPosition = 360; // Adjust the x position as needed
+    // const courseYPosition = 218;
+    const dateXPosition = 160; // Adjust the x position as needed
+    const dateYPosition = 130;
   
-    firstPage.drawText(` "${selectedCourse}"`, {
-      x: courseXPosition,
-      y: courseYPosition,
-      size: courseFontSize,
-      font: customFont,
-      color: rgb(0, 0, 0),
-    });
+    // firstPage.drawText(` "${selectedCourse}"`, {
+    //   x: courseXPosition,
+    //   y: courseYPosition,
+    //   size: courseFontSize,
+    //   font: customFont,
+    //   color: rgb(0, 0, 0),
+    // });
   
     firstPage.drawText(`${selectedDate}`, {
       x: dateXPosition,
       y: dateYPosition,
       size: dateFontSize,
-      font: customFont,
+      font: dateFont,
       color: rgb(0, 0, 0),
     });
   
